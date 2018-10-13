@@ -1,0 +1,35 @@
+<div xmlns:th="http://www.thymeleaf.org"
+     style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">
+
+    <a th:href="@{/}">Home</a>
+
+    | &nbsp;
+
+    <a th:href="@{/usersPage}">User Info</a>
+
+    | &nbsp;
+
+    <a th:href="@{/adminPage}">Admin</a>
+
+    | &nbsp;
+
+    <a th:href="@{/userLogsPage}">Conexion logs</a>
+
+    | &nbsp;
+
+    <a th:href="@{/produitsPage}">Produits</a>
+
+    | &nbsp;
+    <a th:href="@{/panierPage}">Panier</a>
+
+    | &nbsp;
+
+    <a th:href="@{/comandePage}">Comandes</a>
+
+    | &nbsp;
+    <a th:href="@{/categoriePage}">Categories</a>
+
+    | &nbsp;
+    <a th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a>
+
+</div>

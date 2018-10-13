@@ -1,0 +1,17 @@
+<div xmlns:th="http://www.thymeleaf.org"
+     style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">
+
+
+    <th:block th:each="c:${categorie}" >
+
+        <tr>
+            <th>
+                <a th:href="@{/showCategorie/{id}(id=${categorie.id})}" th:text="*{name}">.</a>
+            </th>
+
+
+        </tr>
+
+
+        </th:block>
+</div>

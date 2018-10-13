@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Users</title>
+</head>
+<body>
+<!-- Include _menu.html -->
+<th:block th:include="/_menu"></th:block>
+
+    <a th:href="@{/addUser}">Add User</a>
+    <a th:href="@{/rolePage}">Gestion de roles</a>
+<table>
+    <th:block th:each="user : ${Users}" >
+        <tr>
+
+            <th>name : </th>
+            <td th:text="${user.name}"><b>name : </b></td>
+
+            <th>e-mail :</th>
+            <td th:text="${user.email}"><b>e-mail :</b></td>
+            <th>ROLE :</th>
+            <td th:each="userRole : ${user.roles}" th:value="${userRole.id}" th:text="${userRole.name}"><b>e-mail :</b></td>
+            <th><a th:href="@{/deleteUser(id=${user.id})}" class="btn btn-danger">Delete</a>
+            </th>
+            <th><a th:href="@{/updateUser/{id}(id=${user.id})}">Update User</a></th>
+        </tr>
+    </th:block>
+</table>
+
+</body>
+</html>

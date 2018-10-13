@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Panier</title>
+</head>
+<body>
+<!-- Include _menu.html -->
+<th:block th:include="/_menu"></th:block>
+
+
+<table>
+    <th:block th:each="produit : ${produit}" >
+        <tr>
+
+            <th>name : </th>
+            <td th:text="${produit.key.name}"><b>name : </b></td>
+
+            <th>Reference :</th>
+            <td th:text="${produit.key.reference}"><b>e-mail :</b></td>
+            <th>Prix :</th>
+            <td th:text="${produit.key.prix}"><b>e-mail :</b></td>
+            <th>Quantité :</th>
+            <td th:text="${produit.value}"><b>e-mail :</b></td>
+            <th><a th:href="@{/deleteProduitFromPanier/{id}(id=${produit.key.id})}" class="btn btn-danger">Delete</a>
+            </th>
+
+        </tr>
+    </th:block>
+</table>
+<table>
+    <tr>
+        <th>Total :</th>
+        <td th:text="${total}"><b></b></td>
+    </tr>
+    <tr>
+        <th><a th:href="@{/emptyPanier}" class="btn btn-danger">Vider</a>
+    </tr>
+    <tr>
+        <th><a th:href="@{/validateComande}">Valider Comande</a>
+    </tr>
+</table>
+</body>
+</html>

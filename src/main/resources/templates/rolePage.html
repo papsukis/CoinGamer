@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Users</title>
+</head>
+<body>
+<!-- Include _menu.html -->
+<th:block th:include="/_menu"></th:block>
+
+<a th:href="@{/addRole}" class="btn btn-danger">Ajouter Role</a>
+<table>
+    <th:block th:each="role : ${roles}" >
+        <tr>
+            <th>name : </th>
+            <td th:text="${role.name}"><b>name : </b></td>
+
+            <th>description :</th>
+            <td th:text="${role.description}"><b></b></td>
+            <th>ROLE :</th>
+            <td th:each="privilege : ${role.privileges}" th:value="${privilege.id}" th:text="${privilege.name}"><b></b></td>
+            <th><a th:href="@{/deleteRole(id=${role.id})}" class="btn btn-danger">Delete</a>
+            </th>
+            <th><a th:href="@{/updateRole/{id}(id=${role.id})}">Update</a></th>
+        </tr>
+    </th:block>
+</table>
+
+</body>
+</html>

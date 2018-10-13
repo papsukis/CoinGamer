@@ -1,0 +1,18 @@
+<div th:fragment="header">
+    <ul>
+        <li>
+
+            <a href="/" th:href="@{/}">
+                <span>Home</span>
+            </a>
+        </li>
+        <li th:each="c:${categorie}">
+            <a href="#" th:href="@{'/c' + ${c.id}}">
+                <span th:text="${c.name}"></span>
+            </a>
+
+        </li>
+    </ul>
+
+
+</div>

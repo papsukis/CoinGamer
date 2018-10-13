@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:fragment="head" th:remove="tag">
+    <title>Tecdoc</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap-theme.min.css}"
+          rel="stylesheet" media="screen" />
+
+    <link rel="stylesheet" href="../static/css/app.css" >
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse" th:fragment="top-navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" th:href="@{/}">Tecdoc</a>
+        </div>
+        <ul class="nav navbar-nav" >
+            <li class="active"><a href="#" th:href="@{/index}" sec:authorize="isAuthenticated()">Home</a></li>
+            <li><a href="#" th:href="@{/usersPage}" sec:authorize="isAuthenticated()">Gestion Utilisateurs</a></li>
+            <li><a href="#" th:href="@{/userLogsPage}" sec:authorize="isAuthenticated()">Historique des conexions</a></li>
+        <li>
+        <form class="navbar-form navbar-center">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#" th:href="@{/panierPage}"><span class="glyphicon glyphicon-shopping-cart" style="font-size:20px;"></span><span class="badge badge-notify" th:text="${quantity}" ></span></a></li>
+            <li><a href="#" th:href="@{/login}" sec:authorize="isAuthenticated() == false"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li><a href="#" th:href="@{/logout}" sec:authorize="isAuthenticated()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+
+<!--<div class="nav" th:fragment="categorieList">
+<div  th:each="c:${categorie}">
+    <a class="row" href="#" th:href="@{'/showCategorie(id=${c.id})}">
+        <span th:text="${c.name}"></span>
+    </a></div>
+</div>-->
+
+
+</body>
+</html>

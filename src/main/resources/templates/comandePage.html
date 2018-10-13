@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Panier</title>
+</head>
+<body>
+<!-- Include _menu.html -->
+<th:block th:include="/_menu"></th:block>
+
+
+<table>
+    <th:block th:each="c : ${comandes}" >
+        <tr>
+
+            <th>Utilisateur : </th>
+            <td th:text="${c.user.name}"><b>name : </b></td>
+
+            <th>Total :</th>
+            <td th:text="${c.total}"><b>e-mail :</b></td>
+
+            <th>Etat :</th>
+            <td th:text="${c.etat}"><b>e-mail :</b></td>
+
+            <th><td><a th:href="@{/comandeDetails/{id}(id=${c.id})}">Details</a></td></th>
+        </tr>
+    </th:block>
+</table>
+
+</body>
+</html>

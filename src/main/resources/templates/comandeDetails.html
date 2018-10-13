@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Panier</title>
+</head>
+<body>
+<!-- Include _menu.html -->
+<th:block th:include="/_menu"></th:block>
+
+
+<table>
+    <th:block th:object="${comande}" >
+        <tr>
+            <th>Utilisateur : </th>
+            <td th:text="*{user.name}"><b>name : </b></td>
+
+            <th>Total :</th>
+            <td th:text="*{total}"><b>e-mail :</b></td>
+
+            <th>Etat :</th>
+            <td th:text="*{etat}"><b>e-mail :</b></td>
+            <br/>
+                <tr th:each="p : ${produitList}" >
+                    <th>Nom Produit :</th>
+                    <td th:text="${p.key.name}"><b>e-mail :</b></td>
+                    <th>prix :</th>
+                    <td th:text="${p.key.prix}"><b>e-mail :</b></td>
+                    <th>Quantité :</th>
+                    <td th:text="${p.value}"><b>e-mail :</b></td>
+                </tr>
+        </tr>
+    </th:block>
+
+</table>
+<a th:href="@{/comandePage}">Retour</a>
+</body>
+</html>
