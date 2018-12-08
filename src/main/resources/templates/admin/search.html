@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head th:replace="common/header :: head"></head>
+    <!--<div th:include="admin/common/header :: admin-css"></div>-->
+
+</head>
+<body id="page-top">
+<header>
+    <div th:include="admin/common/header :: admin-navigation">...</div>
+    <div th:insert="admin/common/header :: sidebar(produits)">...</div>
+</header>
+<main>
+    <div id="content">
+        <div class="container-fluid mt-5">
+
+            <div id="content-wrapper">
+
+                <div class="jumbotron">
+                    <div class="row">
+                        <div class="col-3">
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#addProduit">Add Produit</button>
+                            <form class="form-inline md-form form-sm mt-0 " th:action="@{/admin/search}" method="get">
+
+
+                                <div class="form-row mb-4">
+                                    <input class="form-control form-control-sm ml-3 w-75" type="text" name="nom" placeholder="Nom" aria-label="Search">
+                                </div>
+                                <div class="form-row mb-4">
+                                    <input class="form-control form-control-sm ml-3 w-75" type="text" name="reference" placeholder="Reference" aria-label="Search">
+                                </div>
+                                <div class="form-row mb-4">
+                                    <div class="col">
+
+                                        <input type="number" name="prixMin" class="form-control form-control-sm ml-3 w-75" placeholder="Prix minimum">
+                                    </div>
+                                    <div class="col">
+
+                                        <input type="number" name="prixMax" class="form-control form-control-sm ml-3 w-75" placeholder="Prix maximum">
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary" type="submit" value="Create"></button>
+
+                            </form>
+                        </div>
+                        <div class="col-9">
+
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Nom</th>
+                                    <th scope="col">Reference</th>
+                                    <th scope="col">Prix</th>
+                                    <th scope="col">Disponibilité</th>
+                                    <th scope="col">Update</th>
+                                    <th scope="col">Delete</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <div th:each="produit : ${produits.content}" >
+                                    <tr>
+                                    <tr>
+
+                                        <td th:text="${produit.name}"><b>name : </b></td>
+
+                                        <td th:text="${produit.reference}"><b>e-mail :</b></td>
+
+                                        <td th:text="${produit.prix}"><b>e-mail :</b></td>
+
+                                        <td th:text="${produit.disponibilite}"><b>e-mail :</b></td>
+
+
+                                        <th><a th:href="@{/admin/deleteProduit(id=${produit.id})}" class="btn btn-danger">Delete</a>
+                                        </th>
+                                        <th><a th:href="@{/admin/updateProduit/{id}(id=${produit.id})}">Update</a></th>
+
+                                    </tr>
+                                    </tr>
+                                </div>
+                                </tbody>
+                            </table>
+                            <ul class="nav nav-pills">
+
+                                <li class="nav-item" th:each="i : ${#numbers.sequence(0,produits.totalPages-1)}">
+                                    <a th:href="@{/admin/search(nom=${#httpServletRequest.getParameter('nom')} ,
+                                    reference=${#httpServletRequest.getParameter('reference')} ,
+                                    prixMin=${#httpServletRequest.getParameter('prixMin')} ,
+                                    prixMax=${#httpServletRequest.getParameter('prixMax')} ,
+                                    page=${i})}"
+                                       th:text="${i}" class="nav-link" th:classappend="${currentPage}==${i} ? 'active' : ''"></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+
+            <div th:insert="common/modal :: addProduit"></div>
+        </div>
+    </div>
+</main>
+<div th:replace="common/scripts :: commmon"></div>
+
+</body>
+</html>

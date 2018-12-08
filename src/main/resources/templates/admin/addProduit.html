@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head th:replace="common/header :: head"></head>
+</head>
+<body>
+<h1>Ajouter Produit:</h1>
+
+<!--
+   In Thymeleaf the equivalent of
+   JSP's ${pageContext.request.contextPath}/edit.html
+   would be @{/edit.html}
+   -->
+<form th:action="@{/addProduit}"
+      th:object="${Produit}" method="POST" enctype="multipart/form-data" class="text-center border border-light p-5">
+
+
+
+        <label>Nom Produit : </label>
+        <input type="text" class="form-control" th:field="*{name}" placeholder="Nom Produit"/>
+
+        <label>Reference : </label>
+        <input type="text" class="form-control" th:field="*{reference}"  placeholder="Reference"/>
+
+        <label>Prix : </label>
+        <input type="number" class="form-control" th:field="*{prix}"  placeholder="Prix" required="required"/>
+
+        <label>Promotion : </label>
+        <input type="number" class="form-control" th:field="*{promotion}"  placeholder="Promotion"/>
+
+
+    <input type="button" id="addrows"   name="addrows" class="addProduit" value="Add Rows" >
+        <div id="inner" ></div>
+
+
+
+        <input type='file' id="imgInp" name="uploadfile"/>
+        <img id="blah" src="#" alt="your image" style="width: 8em;height: 10em;" />
+
+        <label>Disponibilité : </label>
+        <div th:each="disponibilite : ${T(com.lecoingamer.model.Disponibilite).values()}" class="custom-control custom-radio d-flex align-start">
+            <input type="radio" class="custom-control-input" th:value="${disponibilite}" th:field="*{disponibilite}" />
+            <label th:for="${#ids.prev('disponibilite')}" class="custom-control-label" th:text="${disponibilite.description}"></label>
+        </div>
+
+        <label>Catégorie : </label>
+        <div th:each="c : ${categories}" class="radio ">
+            <input type="radio" th:field="*{categorie}" th:value="${c.id}" />
+            <label th:for="${#ids.prev('categorie')}" th:text="${c.name}"></label>
+        </div>
+
+
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+
+<br/></form>
+
+<!-- Check if errorMessage is not null and not empty -->
+
+<div th:if="${errorMessage}" th:utext="${errorMessage}"
+     style="color:red;font-style:italic;">
+    ...
+</div>
+<div th:replace="common/footer :: footer">...</div>
+</body>
+</html>

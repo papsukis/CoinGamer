@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head th:replace="common/header :: head"></head>
+</head>
+<body>
+<!-- Include _menu.html -->
+<div th:include="admin/common/header :: admin-navigation">...</div>
+<div th:insert="admin/common/header :: sidebar(categories)">...</div>
+
+<div id="content">
+    <div class="container-fluid mt-5">
+        <div id="content-wrapper">
+
+            <div class="row">
+                <div class="col-3">
+                    <a th:href="@{/addCategorie}" class="btn btn-danger" data-toggle="modal" data-target="#addCategorie">Ajouter Categorie</a>
+                </div>
+
+                <div class="col-9">
+                    <div class="row">
+                    <div class="col-lg-3" th:each="c : ${categories}" >
+                        <div class="card mt-2">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                <h4 class="card-title" th:value="${c.id}" th:text="${c.name}"><a>Card title</a></h4>
+                                <a th:href="@{/admin/deletecat(id=${c.id})}"><i class="fa fa-fw fa-window-close"></i></a>
+                                </div>
+                                <div class="list-group" th:each="f : ${c.sousCategories}">
+                                    <div class="list-group-item list-group-item-action" >
+                                        <div class="d-flex  justify-content-between">
+                                        <a  th:onclick="'javascript:showProduits(\'' + ${f.id} +'\');'" th:value="${f.id}" th:text="${f.name}"></a>
+
+                                            <a th:href="@{/admin/delete(id=${f.id})}"><i class="fa fa-fw fa-window-close"></i></a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="mx-auto">
+                                <button class="btn btn-primary btn-sm" th:onclick="'javascript:addSouscategorie(\'' + ${c.id} +'\');'">Ajouter sous categorie</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="souscategorie"></div>
+        <div id="showProduits"></div>
+        <div th:insert="common/modal :: ajouterCat"></div>
+    </div>
+</div>
+
+
+<div th:replace="common/scripts :: commmon"></div>
+</body>
+</html>

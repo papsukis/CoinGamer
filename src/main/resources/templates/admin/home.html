@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head th:replace="common/header :: head"></head>
+    <!--<div th:include="admin/common/header :: admin-css"></div>-->
+
+</head>
+<body id="page-top">
+<header>
+<div th:include="admin/common/header :: admin-navigation">...</div>
+    <div th:insert="admin/common/header :: sidebar(home)">...</div>
+</header>
+<main>
+    <div id="content">
+    <div class="container-fluid mt-5">
+
+        <!-- Heading -->
+        <div class="card mb-4 wow fadeIn">
+
+            <!--Card content-->
+            <div class="card-body d-sm-flex justify-content-between">
+
+                <h4 class="mb-2 mb-sm-0 pt-1">
+                    <a href="https://mdbootstrap.com/material-design-for-bootstrap/" target="_blank">Home Page</a>
+                    <span>/</span>
+                    <span>Dashboard</span>
+                </h4>
+
+                <form class="d-flex justify-content-center">
+                    <!-- Default input -->
+                    <input type="search" placeholder="Type your query" aria-label="Search" class="form-control">
+                    <button class="btn btn-primary btn-sm my-0 p" type="submit">
+                        <i class="fa fa-search"></i>
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+
+
+</main>
+<div th:replace="common/scripts :: commmon"></div>
+
+</body>
+</html>

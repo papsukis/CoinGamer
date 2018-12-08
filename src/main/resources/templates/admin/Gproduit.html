@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head th:replace="common/header :: head"></head>
+</head>
+<body>
+<!-- Include _menu.html -->
+<div th:include="admin/common/header :: admin-navigation">...</div>
+<div th:insert="admin/common/header :: sidebar(categories)">...</div>
+
+<div id="content">
+    <div class="container-fluid mt-5">
+        <div id="content-wrapper">
+
+
+            <form th:action="@{/admin/Gproduit}"
+                  th:object="${sc}" method="POST">
+                <input type="hidden"  th:field="*{id}"/>
+                <input type="hidden"  th:field="*{name}"/>
+                <input type="hidden" th:field="*{categorie}"/>
+                <span th:text="${sc.id}"></span>
+            <li th:each="r : ${produits}" >
+                <input type="checkbox" th:field="*{produits}" th:value="${r.id}" />
+                <label th:for="${#ids.prev('produits')}"
+                       th:text="${r.name}"></label>
+            </li>
+                <input type="submit" value="update" />
+            </form>
+
+    </div>
+</div>
+</div>
+
+<div th:replace="common/scripts :: commmon"></div>
+</body>
+</html>
