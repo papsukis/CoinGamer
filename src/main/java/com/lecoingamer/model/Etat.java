@@ -2,6 +2,7 @@ package com.lecoingamer.model;
 
 public enum Etat {
 
+
     A_Livrer("A livrer"),
     Paye("Payé"),
     En_Attente_Paiement("En attente de paiment"),

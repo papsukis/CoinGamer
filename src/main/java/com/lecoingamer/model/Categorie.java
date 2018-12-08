@@ -2,6 +2,7 @@ package com.lecoingamer.model;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 public class Categorie {
@@ -10,17 +11,16 @@ public class Categorie {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
-    @OneToMany(mappedBy = "categorie")
-    List<Produit> produits;
+    @OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL,mappedBy = "categorie")
+    private List<SousCategorie> sousCategories;
 
-    public List<Produit> getProduits() {
-        return produits;
+    public List<SousCategorie> getSousCategories() {
+        return sousCategories;
     }
 
-    public void setProduits(List<Produit> produits) {
-        this.produits = produits;
+    public void setSousCategories(List<SousCategorie> sousCategories) {
+        this.sousCategories = sousCategories;
     }
-    //private String icone;
 
     public int getId() {
         return id;

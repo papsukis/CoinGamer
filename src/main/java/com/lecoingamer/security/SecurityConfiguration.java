@@ -13,6 +13,7 @@ import org.springframework.security.access.vote.RoleVoter;
 import org.springframework.security.access.vote.UnanimousBased;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -51,16 +52,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.
-                authorizeRequests()
-                .antMatchers("/", "/login", "/logout").permitAll()
+
+
+        http
+                //.anonymous().and()
+                .authorizeRequests()
+                .antMatchers("/","/index","/login", "/logout").permitAll()
+                .antMatchers("/webjars/**").permitAll()
+                //.antMatchers("/ressources/**").permitAll().anyRequest().permitAll()
                 .antMatchers("/user/").permitAll()
                 .antMatchers("/user/**").permitAll()
                 .antMatchers("/roles").permitAll()
                 .antMatchers("/role").permitAll()
                 .antMatchers("/role/**").permitAll()
-                .antMatchers("/resources/**").permitAll()
-                .antMatchers("/static/**","/webjars/**").permitAll()
                 .antMatchers("/usersPage").hasAuthority("ROLE_USER")
                 .antMatchers("/adminPage").hasAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated().and().csrf().disable().formLogin()
@@ -68,16 +72,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and().formLogin()//
                 .loginProcessingUrl("/j_spring_security_check")
                 .loginPage("/login")//
-                .defaultSuccessUrl("/usersPage")//
+                .defaultSuccessUrl("/index",true)//
                 .failureUrl("/login?error=true")
                 .usernameParameter("name")//
                 .passwordParameter("password")
                 .and().logout().logoutUrl("/logout").logoutSuccessUrl("/logoutSuccessful")
                 .and().exceptionHandling()
                 ;
-
+        http.authorizeRequests().antMatchers("/resources/**").permitAll().anyRequest().permitAll();
     }
-
+    /*@Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/ressources/**","/webjars/**");//,"/","/index");
+    }
+*/
 
     /*@Bean
     public PersistentTokenRepository persistentTokenRepository() {

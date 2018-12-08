@@ -8,12 +8,15 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
+import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +33,8 @@ public class MainController {
     ProduitServices produitServices;
     @Autowired
     PanierServices panierServices;
-
+    @Autowired
+    ImageServices imageServices;
 
     @Autowired
     CategorieServices categorieServices;
@@ -38,11 +42,19 @@ public class MainController {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
-    public String welcomePage(Model model) {
+    public String welcomePage(Model model) throws IOException {
+
+        try {
+            imageServices.createImage("C:\\Users\\c\\Documents\\Youssef projet\\sources\\wetransfer-1edbea\\Banner.jpg");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
 
         int total = 0;
         int quantity = 0;
-        User logedUser = userServices.findByName(SecurityContextHolder.getContext().getAuthentication().getName());
+        /*User logedUser = userServices.findByName(SecurityContextHolder.getContext().getAuthentication().getName());
         if(logedUser!=null) {
             Panier panier = panierServices.findByUser(logedUser);
 
@@ -53,16 +65,20 @@ public class MainController {
                 total = total + (p.getKey().getPrix() * p.getValue());
                 quantity++;
             }
-        }
+        }*/
         model.addAttribute("categorie",categorieServices.findAllCategorie());
-       // model.addAttribute("title", "Welcome");
+        model.addAttribute("banner", imageServices.getImage("C:\\Users\\c\\Documents\\Youssef projet\\sources\\wetransfer-1edbea\\Banner.jpg"));
         //model.addAttribute("message", "This is welcome page!");
        model.addAttribute("Produit",new Produit());
        model.addAttribute("Produits",produitServices.findAllProduit());
         model.addAttribute("quantity",quantity);
 
-        return "welcomePage";
+        return "index";
     }
+
+
+
+
 
     @RequestMapping(value = "/adminPage", method = RequestMethod.GET)
     public String adminPage(Model model, User user) {

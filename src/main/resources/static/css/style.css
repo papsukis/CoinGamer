@@ -1,0 +1,165 @@
+/* Required height of parents of the Full Page Carousel for proper displaying carousel itself */
+html,
+body,
+.view {
+  height: 100%; }
+
+/* Full Page Carousel itself*/
+.carousel {
+  height: 100%; }
+  .carousel .carousel-inner {
+    height: 100%; }
+    .carousel .carousel-inner .carousel-item,
+    .carousel .carousel-inner .active {
+      height: 100%; }
+
+/* Navbar animation */
+.navbar {
+  background-color: rgba(0, 0, 0, 0.2);
+  bottom:92%;}
+
+.top-nav-collapse {
+  background-color: #1C2331; }
+
+/* Adding color to the Navbar on mobile */
+@media only screen and (max-width: 768px) {
+  .navbar {
+    background-color: #1C2331; } }
+
+/* Footer color for sake of consistency with Navbar */
+.page-footer {
+  background-color: #1C2331; }
+
+.sidebar-fixed {
+  height: 100vh;
+  width: 200px;
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  z-index: 1050;
+  background: #343a40;
+  padding: 1.5rem;
+  top: 8%;
+  padding-top: 1.5rem;
+  transition: all 0.3s;}
+  .sidebar-fixed .list-group .active {
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #606060;
+    	color: #fff;}
+  .sidebar-fixed .logo-wrapper {
+    padding: 2.5rem; }
+    .sidebar-fixed .logo-wrapper img {
+      max-height: 50px; }
+
+#sidebarcollapsible.active {
+    margin-left: -250px;
+}
+
+#content {
+    width: calc(100% - 200px);
+    padding: 40px;
+    min-height: 100vh;
+    transition: all 0.3s;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#content.active {
+    width: 100%;
+}
+
+#sidebarcollapsible .sidebar-header {
+    padding: 20px;
+    background: #343a40;
+    border-bottom: 1px solid #FFFFFF;
+}
+
+#sidebarcollapsible ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid #FFFFFF;
+}
+
+#sidebarcollapsible ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+#sidebarcollapsible ul div a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+    color:#FFFFFF
+}
+
+#sidebarcollapsible ul div a:hover {
+    color: #7386D5;
+    background: #fff;
+}
+
+#sidebarcollapsible ul div.active>a,
+a[aria-expanded="true"] {
+    /*color: #fff;
+    /*background: #3A3A3A;*/
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #6d7fcc;
+}
+
+ul.CTAs {
+    padding: 20px;
+}
+
+ul.CTAs a {
+    text-align: center;
+    font-size: 0.9em !important;
+    display: block;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+a.download {
+    background: #fff;
+    color: #7386D5;
+}
+
+a.article,
+a.article:hover {
+    background: #6d7fcc !important;
+    color: #fff !important;
+}
+
+
+#sidebarcollapsible .list-unstyled div > a {
+	text-transform: capitalize;
+	color: #F5EFFF
+	transition: background-color .2s, color .2s;
+
+	&:hover,
+	&:focus {
+		background-color: #606060;
+		color: #fff;
+	}
+}
+
+/*#sidebarcollapsible .list-unstyled div.active > a {
+	background-color: #606060;
+	color: #fff;
+}*/

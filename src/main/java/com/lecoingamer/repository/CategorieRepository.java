@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 public interface CategorieRepository extends JpaRepository<Categorie,Integer> {
 
     Categorie findByName(String name);
-    Categorie findByProduits(Produit produit);
+
 
 
 }

@@ -29,20 +29,20 @@ public class UserController {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @RequestMapping(value="/usersPage",method = RequestMethod.GET)
+    @RequestMapping(value="/admin/users",method = RequestMethod.GET)
     public String getAllUsers(Model model,HttpServletRequest request){
 
 
     model.addAttribute("newUser", new User());
     model.addAttribute("Users",userServices.findAllUsers());
 
-    return "usersPage";
+    return "/admin/usersPage";
 
     }
 
 
 
-    @RequestMapping(value = { "/addUser" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/admin/addUser" }, method = RequestMethod.GET)
     public String saveUer(Model model) {
 
         User user=new User();
@@ -50,11 +50,11 @@ public class UserController {
         model.addAttribute("user",user);
         model.addAttribute("allroles",roleServices.findAllRoles());
 
-        return "addUser";
+        return "/admin/addUser";
 
     }
 
-    @RequestMapping(value = { "/saveUser" }, method = RequestMethod.POST)
+    @RequestMapping(value = { "/admin/saveUser" }, method = RequestMethod.POST)
     public String saveUser(Model model, @ModelAttribute("user") User user) {
 
         if(userServices.isUserExist(user)){
@@ -65,20 +65,20 @@ public class UserController {
     userServices.saveUser(user);
 
 
-    return "redirect:/usersPage";
+    return "redirect:/admin/usersPage";
 
     }
 
-    @RequestMapping(value = { "/updateUser/{id}" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/admin//updateUser/{id}" }, method = RequestMethod.GET)
     public String saveUser(Model model,@PathVariable("id") int id) {
 
         model.addAttribute("user",userServices.findById(id));
         model.addAttribute("allRoles",roleServices.findAllRoles());
 
-        return "updateUser";
+        return "/admin/updateUser";
     }
 
-    @RequestMapping(value = { "/updateUser" }, method = RequestMethod.POST)
+    @RequestMapping(value = { "/admin/updateUser" }, method = RequestMethod.POST)
     public String updateUser(Model model,@ModelAttribute("user") User user) {
 
         if(user.getPassword()== null)
@@ -89,16 +89,16 @@ public class UserController {
 
         userServices.updateUser(user);
 
-        return "redirect:/usersPage";
+        return "redirect:/admin/usersPage";
     }
 
 
-    @RequestMapping(value="/deleteUser", method = RequestMethod.GET)
+    @RequestMapping(value="/admin/deleteUser", method = RequestMethod.GET)
     public String deleteUser (@RequestParam("id") int id) {
 
         userServices.deleteUserById(id);
 
-        return "redirect:/usersPage";
+        return "redirect:/admin/usersPage";
     }
 
 
